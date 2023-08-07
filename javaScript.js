@@ -23,7 +23,7 @@ function binary() {
         var inputField = document.getElementById("display");
         var inputText = parseInt(inputField.value);
         let binaryNum= inputText.toString(2);
-        inputField.value = "Output: " + binaryNum;
+        inputField.value = "Binary: " + binaryNum;
 
     } catch (error) {
         document.getElementById("result").innerHTML = "Error";
@@ -36,7 +36,7 @@ function octal() {
         var inputField = document.getElementById("display");
         var inputText = parseInt(inputField.value);
         let octalNum= inputText.toString(8);
-        inputField.value = "Output: " + octalNum;
+        inputField.value = "Octal: " + octalNum;
 
     } catch (error) {
         document.getElementById("result").innerHTML = "Error";
@@ -49,7 +49,7 @@ function hexaDecimal() {
         var inputField = document.getElementById("display");
         var inputText = parseInt(inputField.value);
         let hexaDecimalNum= inputText.toString(16);
-        inputField.value = "Output: " + hexaDecimalNum;
+        inputField.value = "Hexa: " + hexaDecimalNum;
 
     } catch (error) {
         document.getElementById("result").innerHTML = "Error";
@@ -61,7 +61,7 @@ function binaryToDecimal() {
     try {
         var inputField = document.getElementById("display");
         let desimalNum1 = parseInt(inputField.value,2);
-        inputField.value = "binary-desi: " + desimalNum1;
+        inputField.value = "Binary-Desi: " + desimalNum1;
 
     } catch (error) {
         document.getElementById("result").innerHTML = "Error";
@@ -73,7 +73,7 @@ function octalToDecimal() {
     try {
         var inputField = document.getElementById("display");
         let desimalNum2 = parseInt(inputField.value,8);
-        inputField.value = "octal-desi: " + desimalNum2;
+        inputField.value = "Octal-Desi: " + desimalNum2;
 
     } catch (error) {
         document.getElementById("result").innerHTML = "Error";
@@ -85,7 +85,7 @@ function hexaToDecimal() {
     try {
         var inputField = document.getElementById("display");
         let desimalNum3 = parseInt(inputField.value,16);
-        inputField.value = "hexa-desi: " + desimalNum3;
+        inputField.value = "Hexa-Desi: " + desimalNum3;
 
     } catch (error) {
         document.getElementById("result").innerHTML = "Error";
