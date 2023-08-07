@@ -16,8 +16,8 @@
 <body>
     <h1 class="text-3xl font-extrabold text-center pb-14">Welcome to Number System</h1>
 
-    <div class="grid grid-cols-5 gap-x-0 gap-y-0 w-fit m-auto customShadow bg-slate-400 rounded-lg h-full">
-        <input id="display" disabled class="col-span-5 h-20 px-2" type="text" name="text" id="text" hover:bg-or20ge-500 placeholder="Enter your number">
+    <div class="grid grid-cols-6 gap-x-0 gap-y-0 w-fit m-auto customShadow bg-slate-400 rounded-lg h-full">
+        <input id="display" disabled class="col-span-6 h-20 px-2" type="text" name="text" id="text" hover:bg-or20ge-500 placeholder="Enter your number">
         <div><button onclick="appendToDisplay('1')" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">1</button></div>
         <div><button onclick="appendToDisplay('2')" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">2</button></div>
         <div><button onclick="appendToDisplay('3')" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">3</button></div>
@@ -40,18 +40,25 @@
         <div><button onclick="appendToDisplay('/')" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">/</button></div>
         <div><button onclick="appendToDisplay('%')" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">%</button></div>
         <div><button onclick="appendToDisplay('.')" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">.</button></div>
-        <div><button class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">Binary</button></div>
-        <div><button class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">Octal</button></div>
-        <div><button class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">Hexa</button></div>
-        <div><button class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">Decimal</button></div>
-        <div><button onclick="calculaye()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">=</button></div>
-        <div class="col-span-2"><button class="bg-blue-700 text-white text-bold w-full hover:bg-orange-500 h-20 rounded-lg">Rodix Jony</button></div>
+        <div><button onclick="binary()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">Binary</button></div>
+        <div><button onclick="octal()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">Octal</button></div>
+        <div><button onclick="hexaDecimal()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">Hexa</button></div>
+        <div><button onclick="binaryToDecimal()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">BTD</button></div>
+        <div><button onclick="octalToDecimal()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">OTD</button></div>
+        <div><button onclick="hexaToDecimal()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">HTD</button></div>
+        <div><button onclick="binaryToOctal()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">BTO</button></div>
+        <div><button onclick="octalToBinary()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">OTB</button></div>
+        <div><button onclick="binaryToHexadecimal()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">BTH</button></div>
+        <div><button onclick="hexadecimalToBinary()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">HTB</button></div>
+        <div><button onclick="octalToHexadecimal()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">OTH</button></div>
+        <div><button onclick="hexadecimalToOctal()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">HTO</button></div>
+        <div><button onclick="calculate()" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg">=</button></div>
         <div><input onclick="clearDisplay()" type="reset" value="Clear" class="bg-black text-white text-bold w-16 hover:bg-orange-500 h-20 rounded-lg"></input></div>
+        <div class="col-span-6"><button class="bg-blue-700 text-white text-bold w-full hover:bg-orange-500 h-20 rounded-lg">Rodix Jony</button></div>
     </div>
 
 
 
-    <!-- <button id="binary">Convert into Binary</button> -->
     <script src="javaScript.js"></script>
 </body>
 </html>
