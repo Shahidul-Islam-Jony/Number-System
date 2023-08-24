@@ -279,10 +279,33 @@ function hexadecimalToBinary() {
 // for octalToHexadecimal
 function octalToHexadecimal() {
     try {
-        var inputField = document.getElementById("display");
-        let octal = inputField.value;
-        let octalToHexaNum = parseInt(octal, 8).toString(16);
-        setResult('Octal-Hexa', octalToHexaNum);
+        function octalFractionToHexadecimal(octalFraction) {
+            // Split the octal number into whole and fractional parts
+            const [octalWhole, octalFractional] = octalFraction.split('.');
+
+            // Convert octal whole part to decimal
+            const decimalWhole = parseInt(octalWhole, 8);
+
+            // Convert octal fractional part to decimal
+            let decimalFractional = 0;
+            for (let i = 0; i < octalFractional.length; i++) {
+                const digit = parseInt(octalFractional[i], 8);
+                decimalFractional += digit / Math.pow(8, i + 1);
+            }
+
+            // Combine whole and fractional parts
+            const decimalNumber = decimalWhole + decimalFractional;
+
+            // Convert decimal number to hexadecimal
+            const hexadecimalNumber = decimalNumber.toString(16).toUpperCase();
+
+            return hexadecimalNumber;
+        }
+
+        const octalFraction = document.getElementById('display').value; // Replace with your octal fraction
+        const hexadecimalResult = octalFractionToHexadecimal(octalFraction);
+
+        setResult('Octal-Hexa', hexadecimalResult);
 
     } catch (error) {
         printError();
@@ -293,10 +316,36 @@ function octalToHexadecimal() {
 // for hexadecimalToOctal
 function hexadecimalToOctal() {
     try {
-        var inputField = document.getElementById("display");
-        let hexadecimal = inputField.value;
-        let hexadecimalToOctalNum = parseInt(hexadecimal, 16).toString(8);
-        print('Hexa-Octal', hexadecimalToOctalNum);
+
+        function hexFractionToOctal(hexFraction) {
+            // Split the hexadecimal number into whole and fractional parts
+            const [hexWhole, hexFractional] = hexFraction.split('.');
+
+            // Convert hexadecimal whole part to decimal
+            const decimalWhole = parseInt(hexWhole, 16);
+
+            // Convert hexadecimal fractional part to decimal
+            let decimalFractional = 0;
+            for (let i = 0; i < hexFractional.length; i++) {
+                const digit = parseInt(hexFractional[i], 16);
+                decimalFractional += digit / Math.pow(16, i + 1);
+            }
+
+            // Combine whole and fractional parts
+            const decimalNumber = decimalWhole + decimalFractional;
+
+            // Convert decimal number to octal
+            const octalNumber = decimalNumber.toString(8);
+
+            return octalNumber;
+        }
+
+        const hexFraction = document.getElementById('display').value; // Replace with your hexadecimal fraction
+        const octalResult = hexFractionToOctal(hexFraction);
+        // console.log("Hexadecimal:", hexFraction);
+        // console.log("Octal:", octalResult);
+
+        setResult('Hexa-Octal', octalResult);
 
     } catch (error) {
         printError();
