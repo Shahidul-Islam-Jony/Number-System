@@ -7,7 +7,7 @@ function appendToDisplay(value) {
 // getting input field value
 function getInputValue() {
     let inputField = document.getElementById("display");
-    let inputValue = parseInt(inputField.value);
+    let inputValue = parseFloat(inputField.value);
     return inputValue;
 }
 
@@ -15,7 +15,6 @@ function getInputValue() {
 function setResult(name ,result){
     let inputField = document.getElementById('display');
     inputField.value = name+' : '+result;
-    inputField.setAttribute = 'onclick';
 }
 
 // for general calculation
@@ -36,6 +35,22 @@ function convertNumber(base){
     let result = num.toString(base);
     return result;
 }
+
+// convert fractional number
+function fractionToDecimal(fraction,base){
+    let pow = -1;
+    decimalValue = 0;
+    for(let i=0; i < fraction.length; i++){
+        if(fraction[i] !== '0'){
+            let val = parseInt(fraction[i]);
+            let power = Math.pow(base,pow);
+            decimalValue += (val*power);
+        }
+        pow--;
+    }
+    return decimalValue;
+}
+
 // Error handleing
 function printError(){
     document.getElementById("result").innerHTML = "Error";
@@ -71,8 +86,13 @@ function hexaDecimal() {
 // for binaryToDecimal
 function binaryToDecimal() {
     try {
-        let desimalNum = parseInt((getInputValue().toString()),2);
-        setResult('Binary-Deci',desimalNum);
+        let inputField = document.getElementById('display').value.split('.');
+        let decimal = parseInt(inputField[0],2);
+        let fraction = fractionToDecimal(inputField[1],2);
+        console.log(fraction);
+        let result = decimal + (fraction !== 0 ? fraction : '');
+        setResult('Binary-Deci',result);
+
     } catch (error) {
         printError();
     }
