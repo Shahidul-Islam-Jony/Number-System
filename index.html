@@ -17,7 +17,7 @@
     <h1 class="text-3xl font-extrabold text-center pb-14">Welcome to Number System</h1>
 
     <div class="grid grid-cols-6 gap-x-0 gap-y-0 w-fit m-auto customShadow bg-slate-400 rounded-lg h-full">
-        <input id="display" disabled class="col-span-6 h-20 font-extrabold px-2" type="text" name="text" id="text" hover:bg-or20ge-500 placeholder="Enter your number">
+        <input id="display" disabled class="col-span-6 h-20 border-4 border-inherit rounded-lg font-extrabold px-2" type="text" name="text" id="text" hover:bg-or20ge-500 placeholder="Enter your number">
         <div><button onclick="appendToDisplay('1')" class="bg-black text-green-600 font-extrabold w-16 hover:bg-orange-500 h-20 rounded-lg">1</button></div>
         <div><button onclick="appendToDisplay('2')" class="bg-black text-green-600 font-extrabold w-16 hover:bg-orange-500 h-20 rounded-lg">2</button></div>
         <div><button onclick="appendToDisplay('3')" class="bg-black text-green-600 font-extrabold w-16 hover:bg-orange-500 h-20 rounded-lg">3</button></div>
@@ -54,9 +54,9 @@
         <div><button onclick="hexadecimalToOctal()" class="bg-black text-white  w-16 hover:bg-orange-500 h-20 rounded-lg">HTO</button></div>
         <div><button onclick="calculate()" class="bg-black text-green-600 font-extrabold w-16 hover:bg-orange-500 h-20 rounded-lg">=</button></div>
         <div><input onclick="clearDisplay()" type="reset" value="Clear" class="bg-black text-red-600 font-extrabold w-16 hover:bg-orange-500 h-20 rounded-lg"></input></div>
-        <div class="col-span-6"><button class="bg-blue-700 text-white font-extrabold w-full hover:bg-orange-500 h-20 rounded-lg">Rodix Jony</button></div>
+        <div onclick="del()" class="col-span-6"><button class="bg-blue-700 text-white font-extrabold w-full hover:bg-orange-500 h-20 rounded-lg">Rodix Jony</button></div>
     </div>
-
+    
 
 
     <script src="javaScript.js"></script>

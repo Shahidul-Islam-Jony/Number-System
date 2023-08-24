@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delete Input Field Value</title>
+</head>
+<body>
+  <input type="text" id="inputField" value="Hello, World!">
+  <button id="clearButton">Clear Value</button>
+
+  <script>
+    // Get references to the input field and the clear button
+    var inputField = document.getElementById('inputField');
+    var clearButton = document.getElementById('clearButton');
+    
+    // Store the original value
+    var originalValue = inputField.value;
+    
+    // Add an event listener to the clear button
+    clearButton.addEventListener('click', function() {
+        // Remove the last character from the value
+        inputField.value = inputField.value.slice(0, -1);
+    
+    });
+  </script>
+</body>
+</html>

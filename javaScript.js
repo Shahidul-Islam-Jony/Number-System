@@ -4,12 +4,25 @@ function appendToDisplay(value) {
     document.getElementById("display").value += value;
 }
 
+// getting input field value
+function getInputValue() {
+    let inputField = document.getElementById("display");
+    let inputValue = parseInt(inputField.value);
+    return inputValue;
+}
+
+// settting result to input field
+function setResult(name ,result){
+    let inputField = document.getElementById('display');
+    inputField.value = name+' : '+result;
+    inputField.setAttribute = 'onclick';
+}
+
 // for general calculation
 function calculate() {
     try {
         var inputField = document.getElementById("display");
         var inputText = eval(inputField.value);
-
         inputField.value = "Output: " + inputText;
 
     } catch (error) {
@@ -17,102 +30,96 @@ function calculate() {
     }
 }
 
+// convert Number
+function convertNumber(base){
+    let num =getInputValue();
+    let result = num.toString(base);
+    return result;
+}
+// Error handleing
+function printError(){
+    document.getElementById("result").innerHTML = "Error";
+}
+
 // for binary
 function binary() {
     try {
-        var inputField = document.getElementById("display");
-        var inputText = parseInt(inputField.value);
-        let binaryNum= inputText.toString(2);
-        inputField.value = "Binary: " + binaryNum;
-
+        setResult('Binary',convertNumber(2));
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
 // for octal
 function octal() {
     try {
-        var inputField = document.getElementById("display");
-        var inputText = parseInt(inputField.value);
-        let octalNum= inputText.toString(8);
-        inputField.value = "Octal: " + octalNum;
-
+        setResult('Octal',convertNumber(8));
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
 // for hexaDecimal
 function hexaDecimal() {
     try {
-        var inputField = document.getElementById("display");
-        var inputText = parseInt(inputField.value);
-        let hexaDecimalNum= inputText.toString(16);
-        inputField.value = "Hexa: " + hexaDecimalNum;
-
+        setResult('Hexadecimal',convertNumber(16));
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
 // for binaryToDecimal
 function binaryToDecimal() {
     try {
-        var inputField = document.getElementById("display");
-        let desimalNum1 = parseInt(inputField.value,2);
-        inputField.value = "Binary-Desi: " + desimalNum1;
-
+        let desimalNum = parseInt((getInputValue().toString()),2);
+        setResult('Binary-Deci',desimalNum);
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
 // for octalToDecimal
 function octalToDecimal() {
     try {
-        var inputField = document.getElementById("display");
-        let desimalNum2 = parseInt(inputField.value,8);
-        inputField.value = "Octal-Desi: " + desimalNum2;
-
+        let desimalNum = parseInt((getInputValue().toString()), 8);
+        setResult('Octal-Deci',desimalNum)
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
 // for hexaToDecimal
 function hexaToDecimal() {
     try {
-        var inputField = document.getElementById("display");
-        let desimalNum3 = parseInt(inputField.value,16);
-        inputField.value = "Hexa-Desi: " + desimalNum3;
-
+        let inputField = document.getElementById("display");
+        let desimalNum = parseInt(inputField.value, 16);
+        setResult('Hexa-deci',desimalNum);
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 // for binaryToOctal
 function binaryToOctal() {
     try {
         var inputField = document.getElementById("display");
-        let binary=inputField.value;
-        let binaryToOctalNum = parseInt(binary,2).toString(8);
-        inputField.value = "binaryToOctal: " + binaryToOctalNum;
+        let binary = inputField.value;
+        let binaryToOctalNum = parseInt(binary, 2).toString(8);
+        setResult('Binary-Octal',binaryToOctalNum);
 
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+       printError();
     }
 }
 // for octalToBinary
 function octalToBinary() {
     try {
         var inputField = document.getElementById("display");
-        let octal=inputField.value;
-        let octalToBinaryNum = parseInt(octal,8).toString(2);
-        inputField.value = "octalToBinary: " + octalToBinaryNum;
+        let octal = inputField.value;
+        let octalToBinaryNum = parseInt(octal, 8).toString(2);
+        setResult('Octal-Binary',octalToBinaryNum);
 
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
@@ -120,12 +127,12 @@ function octalToBinary() {
 function binaryToHexadecimal() {
     try {
         var inputField = document.getElementById("display");
-        let binary=inputField.value;
-        let binaryToHexaNum = parseInt(binary,2).toString(16);
-        inputField.value = "binaryToHexadecimal: " + binaryToHexaNum;
+        let binary = inputField.value;
+        let binaryToHexaNum = parseInt(binary, 2).toString(16);
+        setResult('Binary-Hexa',binaryToHexaNum);
 
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
@@ -133,12 +140,12 @@ function binaryToHexadecimal() {
 function hexadecimalToBinary() {
     try {
         var inputField = document.getElementById("display");
-        let hexadecimal=inputField.value;
-        let hexadecimalToBinaryNum = parseInt(hexadecimal,16).toString(2);
-        inputField.value = "hexadecimalToBinary: " + hexadecimalToBinaryNum;
+        let hexadecimal = inputField.value;
+        let hexadecimalToBinaryNum = parseInt(hexadecimal, 16).toString(2);
+        setResult('Hexa-Binary',hexadecimalToBinaryNum);
 
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
@@ -146,12 +153,12 @@ function hexadecimalToBinary() {
 function octalToHexadecimal() {
     try {
         var inputField = document.getElementById("display");
-        let octal=inputField.value;
-        let octalToHexaNum = parseInt(octal,8).toString(16);
-        inputField.value = "octalToHexadecimal: " + octalToHexaNum;
+        let octal = inputField.value;
+        let octalToHexaNum = parseInt(octal, 8).toString(16);
+        setResult('Octal-Hexa',octalToHexaNum);
 
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
@@ -160,12 +167,12 @@ function octalToHexadecimal() {
 function hexadecimalToOctal() {
     try {
         var inputField = document.getElementById("display");
-        let hexadecimal=inputField.value;
-        let hexadecimalToOctalNum = parseInt(hexadecimal,16).toString(8);
-        inputField.value = "hexadecimalToOctal: " + hexadecimalToOctalNum;
+        let hexadecimal = inputField.value;
+        let hexadecimalToOctalNum = parseInt(hexadecimal, 16).toString(8);
+        print('Hexa-Octal',hexadecimalToOctalNum);
 
     } catch (error) {
-        document.getElementById("result").innerHTML = "Error";
+        printError();
     }
 }
 
@@ -173,5 +180,9 @@ function hexadecimalToOctal() {
 // clear button
 function clearDisplay() {
     document.getElementById("display").value = "";
-    document.getElementById("result").innerHTML = "";
+}
+
+function del(){
+    const inputField = document.getElementById('display');
+    inputField.value = inputField.value.slice(0,-1);
 }
