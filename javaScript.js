@@ -12,9 +12,9 @@ function getInputValue() {
 }
 
 // settting result to input field
-function setResult(name ,result){
+function setResult(name, result) {
     let inputField = document.getElementById('display');
-    inputField.value = name+' : '+result;
+    inputField.value = name + ' : ' + result;
 }
 
 // for general calculation
@@ -30,21 +30,21 @@ function calculate() {
 }
 
 // convert Number
-function convertNumber(base){
-    let num =getInputValue();
+function convertNumber(base) {
+    let num = getInputValue();
     let result = num.toString(base);
     return result;
 }
 
 // convert fractional number
-function fractionToDecimal(fraction,base){
+function fractionToDecimal(fraction, base) {
     let pow = -1;
     decimalValue = 0;
-    for(let i=0; i < fraction.length; i++){
-        if(fraction[i] !== '0'){
+    for (let i = 0; i < fraction.length; i++) {
+        if (fraction[i] !== '0') {
             let val = parseInt(fraction[i]);
-            let power = Math.pow(base,pow);
-            decimalValue += (val*power);
+            let power = Math.pow(base, pow);
+            decimalValue += (val * power);
         }
         pow--;
     }
@@ -52,14 +52,14 @@ function fractionToDecimal(fraction,base){
 }
 
 // Error handleing
-function printError(){
+function printError() {
     document.getElementById("result").innerHTML = "Error";
 }
 
 // for binary
 function binary() {
     try {
-        setResult('Binary',convertNumber(2));
+        setResult('Binary', convertNumber(2));
     } catch (error) {
         printError();
     }
@@ -68,7 +68,7 @@ function binary() {
 // for octal
 function octal() {
     try {
-        setResult('Octal',convertNumber(8));
+        setResult('Octal', convertNumber(8));
     } catch (error) {
         printError();
     }
@@ -77,7 +77,7 @@ function octal() {
 // for hexaDecimal
 function hexaDecimal() {
     try {
-        setResult('Hexadecimal',convertNumber(16));
+        setResult('Hexadecimal', convertNumber(16));
     } catch (error) {
         printError();
     }
@@ -87,11 +87,10 @@ function hexaDecimal() {
 function binaryToDecimal() {
     try {
         let inputField = document.getElementById('display').value.split('.');
-        let decimal = parseInt(inputField[0],2);
-        let fraction = fractionToDecimal(inputField[1],2);
-        console.log(fraction);
+        let decimal = parseInt(inputField[0], 2);
+        let fraction = fractionToDecimal(inputField[1], 2);
         let result = decimal + (fraction !== 0 ? fraction : '');
-        setResult('Binary-Deci',result);
+        setResult('Binary-Deci', result);
 
     } catch (error) {
         printError();
@@ -101,8 +100,12 @@ function binaryToDecimal() {
 // for octalToDecimal
 function octalToDecimal() {
     try {
-        let desimalNum = parseInt((getInputValue().toString()), 8);
-        setResult('Octal-Deci',desimalNum)
+        let inputField = document.getElementById('display').value.split('.');
+        let decimal = parseInt(inputField[0], 8);
+        let fraction = fractionToDecimal(inputField[1], 8);
+        let result = decimal + (fraction !== 0 ? fraction : '');
+        setResult('Octal-Deci', result);
+
     } catch (error) {
         printError();
     }
@@ -111,32 +114,90 @@ function octalToDecimal() {
 // for hexaToDecimal
 function hexaToDecimal() {
     try {
-        let inputField = document.getElementById("display");
-        let desimalNum = parseInt(inputField.value, 16);
-        setResult('Hexa-deci',desimalNum);
+        let inputField = document.getElementById('display').value.split('.');
+        let decimal = parseInt(inputField[0], 16);
+        let fraction = inputField[1];
+        let decimalValue = 0;
+        let pow = -1;
+        for (let i = 0; i < fraction.length; i++) {
+            const hexDigitValue = parseInt(fraction[i], 16);
+            let power = Math.pow(16, pow);
+            decimalValue += hexDigitValue * power;
+            pow--;
+        }
+
+        let result = decimal + (decimalValue !== 0 ? decimalValue : '');
+        setResult('Hexa-Deci', result);
+
     } catch (error) {
         printError();
     }
+
 }
 // for binaryToOctal
 function binaryToOctal() {
     try {
-        var inputField = document.getElementById("display");
-        let binary = inputField.value;
-        let binaryToOctalNum = parseInt(binary, 2).toString(8);
-        setResult('Binary-Octal',binaryToOctalNum);
+        function binaryToOctal(binary) {
+            const parts = binary.split('.');
+            const integerPart = parseInt(parts[0], 2);
+            const octalIntegerPart = integerPart.toString(8);
+
+            let fractionalPart = parts[1] || '';
+
+            // Convert fractional binary part to decimal
+            let decimalFraction = 0;
+            for (let i = 0; i < fractionalPart.length; i++) {
+                decimalFraction += parseInt(fractionalPart[i]) * Math.pow(2, -i - 1);
+                // console.log(decimalFraction);
+            }
+            // Convert the integer and fractional parts to octal
+
+            let octalFractionalPart = '';
+            while (decimalFraction > 0 && octalFractionalPart.length < 10) { // You can adjust the precision
+                decimalFraction *= 8;
+                const intPart = Math.floor(decimalFraction);
+                octalFractionalPart += intPart;
+                decimalFraction -= intPart;
+            }
+
+            return fractionalPart ? `${octalIntegerPart}.${octalFractionalPart}` : octalIntegerPart;
+        }
+
+        const binaryNumber = document.getElementById('display').value;
+        const octalRepresentation = binaryToOctal(binaryNumber);
+        setResult('Binary-Octal', octalRepresentation);
 
     } catch (error) {
-       printError();
+        printError();
     }
 }
 // for octalToBinary
 function octalToBinary() {
     try {
-        var inputField = document.getElementById("display");
-        let octal = inputField.value;
-        let octalToBinaryNum = parseInt(octal, 8).toString(2);
-        setResult('Octal-Binary',octalToBinaryNum);
+        function octalFractionToBinary(octalFraction) {
+            let binaryValue = "";
+            for (let i = 0; i < octalFraction.length; i++) {
+                const octalDigit = parseInt(octalFraction[i], 8);
+                const binaryDigit = octalDigit.toString(2).padStart(3, '0');
+                binaryValue += binaryDigit;
+            }
+            return binaryValue;
+        }
+
+        function octalToBinary(octal) {
+            const parts = octal.split('.');
+            const integerPart = parseInt(parts[0], 8);
+            const binaryIntegerPart = integerPart.toString(2);
+
+            const fractionalPart = parts[1] || "";
+            const binaryFractionalPart = octalFractionToBinary(fractionalPart);
+
+            return fractionalPart ? `${binaryIntegerPart}.${binaryFractionalPart}` : binaryIntegerPart;
+        }
+
+        const octalNumber = document.getElementById('display').value;
+        const binaryRepresentation = octalToBinary(octalNumber);
+        setResult('Octal-Binary', binaryRepresentation);
 
     } catch (error) {
         printError();
@@ -146,10 +207,36 @@ function octalToBinary() {
 // for binaryToHexadecimal
 function binaryToHexadecimal() {
     try {
-        var inputField = document.getElementById("display");
-        let binary = inputField.value;
-        let binaryToHexaNum = parseInt(binary, 2).toString(16);
-        setResult('Binary-Hexa',binaryToHexaNum);
+
+        function binaryFractionToHexadecimal(binaryFraction) {
+            let hexadecimalValue = "";
+
+            for (let i = 0; i < binaryFraction.length; i += 4) {
+                const chunk = binaryFraction.substr(i, 4);
+                const decimalValue = parseInt(chunk, 2);
+                const hexDigit = decimalValue.toString(16).toUpperCase();
+                hexadecimalValue += hexDigit;
+            }
+
+            return hexadecimalValue;
+        }
+
+        function binaryToHexadecimal(binary) {
+            const parts = binary.split('.');
+            const integerPart = parseInt(parts[0], 2);
+            const hexadecimalIntegerPart = integerPart.toString(16).toUpperCase();
+
+            const fractionalPart = parts[1] || "";
+            const binaryFractionalPart = fractionalPart.padEnd(Math.ceil(fractionalPart.length / 4) * 4, '0');
+            const hexadecimalFractionalPart = binaryFractionToHexadecimal(binaryFractionalPart);
+
+            return fractionalPart ? `${hexadecimalIntegerPart}.${hexadecimalFractionalPart}` : hexadecimalIntegerPart;
+        }
+
+        const binaryNumber = document.getElementById('display').value;
+        const hexadecimalRepresentation = binaryToHexadecimal(binaryNumber);
+        setResult('Binary-Hexa', hexadecimalRepresentation);
+
 
     } catch (error) {
         printError();
@@ -159,10 +246,30 @@ function binaryToHexadecimal() {
 // for hexadecimalToBinary
 function hexadecimalToBinary() {
     try {
-        var inputField = document.getElementById("display");
-        let hexadecimal = inputField.value;
-        let hexadecimalToBinaryNum = parseInt(hexadecimal, 16).toString(2);
-        setResult('Hexa-Binary',hexadecimalToBinaryNum);
+        function hexadecimalFractionToBinary(hexFraction) {
+            let binaryValue = "";
+            for (let i = 0; i < hexFraction.length; i++) {
+                const hexDigit = parseInt(hexFraction[i], 16);
+                const binaryDigit = hexDigit.toString(2).padStart(4, '0');
+                binaryValue += binaryDigit;
+            }
+            return binaryValue;
+        }
+
+        function hexadecimalToBinary(hex) {
+            const parts = hex.split('.');
+            const integerPart = parseInt(parts[0], 16);
+            const binaryIntegerPart = integerPart.toString(2);
+
+            const fractionalPart = parts[1] || "";
+            const binaryFractionalPart = hexadecimalFractionToBinary(fractionalPart);
+
+            return fractionalPart ? `${binaryIntegerPart}.${binaryFractionalPart}` : binaryIntegerPart;
+        }
+
+        const hexadecimalNumber = document.getElementById('display').value;
+        const binaryRepresentation = hexadecimalToBinary(hexadecimalNumber);
+        setResult('Hexa-Binary', binaryRepresentation);
 
     } catch (error) {
         printError();
@@ -175,7 +282,7 @@ function octalToHexadecimal() {
         var inputField = document.getElementById("display");
         let octal = inputField.value;
         let octalToHexaNum = parseInt(octal, 8).toString(16);
-        setResult('Octal-Hexa',octalToHexaNum);
+        setResult('Octal-Hexa', octalToHexaNum);
 
     } catch (error) {
         printError();
@@ -189,7 +296,7 @@ function hexadecimalToOctal() {
         var inputField = document.getElementById("display");
         let hexadecimal = inputField.value;
         let hexadecimalToOctalNum = parseInt(hexadecimal, 16).toString(8);
-        print('Hexa-Octal',hexadecimalToOctalNum);
+        print('Hexa-Octal', hexadecimalToOctalNum);
 
     } catch (error) {
         printError();
@@ -202,7 +309,7 @@ function clearDisplay() {
     document.getElementById("display").value = "";
 }
 
-function del(){
+function del() {
     const inputField = document.getElementById('display');
-    inputField.value = inputField.value.slice(0,-1);
+    inputField.value = inputField.value.slice(0, -1);
 }
