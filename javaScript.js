@@ -38,6 +38,7 @@ function convertNumber(base) {
 
 // convert fractional number
 function fractionToDecimal(fraction, base) {
+    console.log(fraction, base);
     let pow = -1;
     decimalValue = 0;
     for (let i = 0; i < fraction.length; i++) {
@@ -88,8 +89,14 @@ function binaryToDecimal() {
     try {
         let inputField = document.getElementById('display').value.split('.');
         let decimal = parseInt(inputField[0], 2);
-        let fraction = fractionToDecimal(inputField[1], 2);
-        let result = decimal + (fraction !== 0 ? fraction : '');
+        let result = 0;
+        if (typeof inputField[1] !== 'undefined') {
+            let fraction = fractionToDecimal(inputField[1], 2);
+            result = decimal + (fraction !== 0 ? fraction : '');
+        }
+        else {
+            result += decimal;
+        }
         setResult('Binary-Deci', result);
 
     } catch (error) {
@@ -102,8 +109,15 @@ function octalToDecimal() {
     try {
         let inputField = document.getElementById('display').value.split('.');
         let decimal = parseInt(inputField[0], 8);
-        let fraction = fractionToDecimal(inputField[1], 8);
-        let result = decimal + (fraction !== 0 ? fraction : '');
+        let result = 0;
+        if (typeof inputField[1] !== 'undefined') {
+
+            let fraction = fractionToDecimal(inputField[1], 8);
+            result = decimal + (fraction !== 0 ? fraction : '');
+        }
+        else {
+            result += decimal;
+        }
         setResult('Octal-Deci', result);
 
     } catch (error) {
@@ -116,17 +130,23 @@ function hexaToDecimal() {
     try {
         let inputField = document.getElementById('display').value.split('.');
         let decimal = parseInt(inputField[0], 16);
-        let fraction = inputField[1];
-        let decimalValue = 0;
-        let pow = -1;
-        for (let i = 0; i < fraction.length; i++) {
-            const hexDigitValue = parseInt(fraction[i], 16);
-            let power = Math.pow(16, pow);
-            decimalValue += hexDigitValue * power;
-            pow--;
-        }
+        let result = 0;
+        if (typeof inputField[1] !== 'undefined') {
+            let fraction = inputField[1];
+            let decimalValue = 0;
+            let pow = -1;
+            for (let i = 0; i < fraction.length; i++) {
+                const hexDigitValue = parseInt(fraction[i], 16);
+                let power = Math.pow(16, pow);
+                decimalValue += hexDigitValue * power;
+                pow--;
+            }
 
-        let result = decimal + (decimalValue !== 0 ? decimalValue : '');
+            result = decimal + (decimalValue !== 0 ? decimalValue : '');
+        }
+        else{
+            result += decimal;
+        }
         setResult('Hexa-Deci', result);
 
     } catch (error) {
